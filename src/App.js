@@ -1,12 +1,14 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Login from "./components/register/Register";
-
+import RegisterAndLogin from "./pages/RegisterAndLogin/RegisterAndLogin";
+import { GlobalDataProvider } from "./components";
 function App() {
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <GlobalDataProvider>
+      <div className="App">
+        <RegisterAndLogin />
+      </div>
+    </GlobalDataProvider>
   );
 }
 
