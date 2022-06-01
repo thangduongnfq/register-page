@@ -3,6 +3,9 @@ import "./Register.css";
 import { Input } from "../index";
 import { useGlobalData } from "../GlobalDataProvider/GlobalDataContext";
 export default function Register() {
+
+
+
   let globalData = useGlobalData();
   var errors = {
     uppercase: { regex: /[A-Z]/, description: "At least one uppercase letter" },
@@ -75,12 +78,7 @@ export default function Register() {
           placeHolder="Password"
         />
 
-        {/* <div className="form-group">
-          <div class="checkbox">
-            <input id="checkbox1" type="checkbox" />
-            <label for="checkbox1">Keep me logged in</label>
-          </div>
-        </div> */}
+  
         <div className="form-group button">
           <button
             className="btnSubmit"

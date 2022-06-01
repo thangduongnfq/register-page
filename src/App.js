@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
+import React from 'react'
 import RegisterAndLogin from "./pages/RegisterAndLogin/RegisterAndLogin";
 import { GlobalDataProvider } from "./components";
 function App() {

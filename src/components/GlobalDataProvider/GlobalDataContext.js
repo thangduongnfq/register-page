@@ -5,7 +5,7 @@ const GlobalDataContext = React.createContext();
 
 function GlobalDataProvider(props) {
   const [loading, setLoading] = useState(false);
-  const [hiddenDiv, sethiddenDiv] = useState(true);
+  const [hiddenDiv, sethiddenDiv] = useState(false);
 
   const [value, setValue] = useState({
     username: "",
@@ -20,6 +20,16 @@ function GlobalDataProvider(props) {
     setHiddenPage();
     setValue(userData);
   }
+  
+  async function fetchUserData(data) {
+    setLoading(true);
+    const userData = await api.login(data);
+    setLoading(false);
+    // setHiddenPage();
+    setValue(userData);
+  }
+
+
 
   const setHiddenPage = () => {
     sethiddenDiv(!hiddenDiv);
