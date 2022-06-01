@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./Register.css";
+import "./LoginPage.css";
 import { Input } from "../index";
 import { useGlobalData } from "../GlobalDataProvider/GlobalDataContext";
-export default function Register() {
+export default function LoginPage() {
   let globalData = useGlobalData();
   var errors = {
     uppercase: { regex: /[A-Z]/, description: "At least one uppercase letter" },
@@ -17,25 +17,6 @@ export default function Register() {
       description: "Should be more than 2 characters",
     },
   };
-
-
-  
-  function validateUserName(value) {
-    if (value.length < 6) {
-      return "username must be at least 6 characters";
-    }
-    return "";
-  }
-
-  function validatePassword(value) {
-    return Object.entries(errors).flatMap(
-      ([name, { test, regex, description }]) => {
-        const isValid = test ? test(value) : regex.test(value);
-        return isValid ? [] : { description, name };
-      }
-    );
-  }
-
   function returnValidatePassword(value) {
     let resultValue = validatePassword(value);
     if (resultValue.length > 0) {
@@ -44,7 +25,20 @@ export default function Register() {
       return "";
     }
   }
-
+  function validateUserName(value) {
+    if (value.length < 6) {
+      return "username must be at least 6 characters";
+    }
+    return "";
+  }
+  function validatePassword(value) {
+    return Object.entries(errors).flatMap(
+      ([name, { test, regex, description }]) => {
+        const isValid = test ? test(value) : regex.test(value);
+        return isValid ? [] : { description, name };
+      }
+    );
+  }
   function validateEmail(sEmail) {
     var reEmail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
@@ -53,7 +47,6 @@ export default function Register() {
     }
     return "";
   }
-
   return (
     <div className="register-form">
       <h1>Create an account</h1>
@@ -64,40 +57,25 @@ export default function Register() {
           placeHolder="Username"
         />
         <Input
-          inputType="text"
-          functionValidator={validateEmail}
-          placeHolder="Email"
-        />
-
-        <Input
           inputType="password"
           functionValidator={returnValidatePassword}
           placeHolder="Password"
         />
-
-        {/* <div className="form-group">
-          <div class="checkbox">
+        <div className="form-group">
+          <div className="checkbox">
             <input id="checkbox1" type="checkbox" />
-            <label for="checkbox1">Keep me logged in</label>
+            <label htmlFor="checkbox1">Keep me logged in</label>
           </div>
-        </div> */}
+        </div>
         <div className="form-group button">
           <button
             className="btnSubmit"
             onClick={(e) => {
               e.preventDefault();
               let { username, email, password } = globalData;
-              if (
-                username.length > 0 &&
-                password.length > 0 &&
-                email.length > 0
-              ) {
-                globalData
-                  .fetchUserData({ username, password })
-              }
             }}
           >
-            Register
+            Login
           </button>
         </div>
       </form>

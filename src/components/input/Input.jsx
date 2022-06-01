@@ -1,10 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import { useGlobalData } from "../../components/GlobalDataProvider/GlobalDataContext";
 export default function Input({ inputType, functionValidator, placeHolder }) {
   const [inptField, setInputField] = useState("");
   const [inputError, setInputError] = useState("");
+  const [onBlurState, setOnBlur] = useState(false);
   const passwordUseRef = useRef();
+  const ref = useRef();
   const [showPassword, setShowPassword] = useState(true);
+  let globalData = useGlobalData();
+  useEffect(() => {
+    if (inputError.length == 0) {
+      globalData.setField(placeHolder.toLowerCase(), inptField);
+    }
+  }, [onBlurState]);
+
   function showAndHidePassword() {
     if (passwordUseRef.current.type === "password") {
       passwordUseRef.current.type = "text";
@@ -21,6 +31,7 @@ export default function Input({ inputType, functionValidator, placeHolder }) {
             ? "form-group input "
             : "form-group input password"
         }
+        ref={ref}
       >
         <input
           type={inputType}
@@ -32,9 +43,15 @@ export default function Input({ inputType, functionValidator, placeHolder }) {
           value={inptField}
           onFocus={() => {
             setInputError("");
+
           }}
           onBlur={(e) => {
-            setInputError(functionValidator(e.target.value));
+            if (functionValidator(e.target.value).length > 0) {
+              setInputError(functionValidator(e.target.value));
+            } else {
+              setInputError("");
+            }
+            setOnBlur(!onBlurState);
           }}
           required="required"
         />

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import HiddenPage from "../../components/HiddenPage/HiddenPage";
-import { Register, ModalLoadding } from "../../components";
+import { Register, ModalLoadding, LoginPage } from "../../components";
 import { useGlobalData } from "../../components/GlobalDataProvider/GlobalDataContext";
 import "./RegisterAndLogin.css";
 export default function () {
@@ -11,12 +11,10 @@ export default function () {
         <Register />
       </div>
       <div className="register-form-container">
-        <Register />
+        <LoginPage />
       </div>
       <HiddenPage />
-      {
-          globalData.loading && <ModalLoadding/>
-      }
+      {globalData.loading && <ModalLoadding />}
     </div>
   );
 }

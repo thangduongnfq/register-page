@@ -1,7 +1,10 @@
 // import React from "react";
+import { useGlobalData } from "../../components/GlobalDataProvider/GlobalDataContext";
 import React, { useEffect, useRef, useState } from "react";
 export default function HiddenPage() {
-  const [hiddenDiv, sethiddenDiv] = useState(true);
+  // const [hiddenDiv, sethiddenDiv] = useState(true);
+  let globalData = useGlobalData();
+  const { hiddenDiv, setHiddenPage } = globalData;
   const ref = useRef();
   useEffect(() => {
     if (hiddenDiv === true) {
@@ -28,7 +31,7 @@ export default function HiddenPage() {
         <div
           className="btnChange"
           onClick={() => {
-            sethiddenDiv(!hiddenDiv);
+            setHiddenPage();
           }}
         >
           {hiddenDiv === true ? "Login" : "Register"}
