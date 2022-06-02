@@ -4,9 +4,7 @@ export default function () {
   return (
     <div className="page-container">
       <div>
-        <h1>Xin Chao Thang : Setting</h1>
-
-        <button>Log Out</button>
+        <p className="textfill">Setting</p>
       </div>
     </div>
   );

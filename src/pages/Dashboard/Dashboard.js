@@ -4,8 +4,9 @@ export default function Dashboard() {
   return (
     <div className="page-container">
       <div>
-        <h1>Xin Chao Thang : Dashboard</h1>
-        <button>Log Out</button>
+        {/* <h1>Xin Chao Thang : Dashboard</h1> */}
+        <p className="textfill">Dashboard</p>
+        {/* <button>Log Out</button> */}
       </div>
     </div>
   );
