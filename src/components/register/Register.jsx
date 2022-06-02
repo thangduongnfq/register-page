@@ -3,9 +3,6 @@ import "./Register.css";
 import { Input } from "../index";
 import { useGlobalData } from "../GlobalDataProvider/GlobalDataContext";
 export default function Register() {
-
-
-
   let globalData = useGlobalData();
   var errors = {
     uppercase: { regex: /[A-Z]/, description: "At least one uppercase letter" },
@@ -21,8 +18,6 @@ export default function Register() {
     },
   };
 
-
-  
   function validateUserName(value) {
     if (value.length < 6) {
       return "username must be at least 6 characters";
@@ -78,7 +73,6 @@ export default function Register() {
           placeHolder="Password"
         />
 
-  
         <div className="form-group button">
           <button
             className="btnSubmit"
@@ -90,8 +84,7 @@ export default function Register() {
                 password.length > 0 &&
                 email.length > 0
               ) {
-                globalData
-                  .fetchUserData({ username, password })
+                globalData.fetchUserData({ username, password });
               }
             }}
           >

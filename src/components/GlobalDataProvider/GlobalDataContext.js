@@ -11,6 +11,7 @@ function GlobalDataProvider(props) {
     username: "",
     email: "",
     password: "",
+    roles: [],
   });
   useEffect(() => {}, [loading]);
   async function fetchUserData(data) {
@@ -20,16 +21,16 @@ function GlobalDataProvider(props) {
     setHiddenPage();
     setValue(userData);
   }
-  
-  async function fetchUserData(data) {
+
+  async function login(data) {
     setLoading(true);
     const userData = await api.login(data);
+    localStorage.setItem("token", userData.Token);
+    localStorage.setItem("roles", userData.role);
+    setField("roles", userData.role);
     setLoading(false);
-    // setHiddenPage();
     setValue(userData);
   }
-
-
 
   const setHiddenPage = () => {
     sethiddenDiv(!hiddenDiv);
@@ -46,6 +47,7 @@ function GlobalDataProvider(props) {
     hiddenDiv,
     setField,
     setHiddenPage,
+    login,
     fetchUserData,
   };
 

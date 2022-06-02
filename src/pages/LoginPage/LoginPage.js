@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./LoginPage.css";
-import { Input } from "../index";
-import { useGlobalData } from "../GlobalDataProvider/GlobalDataContext";
+import { Input } from "../../components/index";
+import { useGlobalData } from "../../components/GlobalDataProvider/GlobalDataContext";
 export default function LoginPage() {
   let [checkBox, setCheckbox] = useState(true);
   let globalData = useGlobalData();
@@ -42,7 +42,7 @@ export default function LoginPage() {
   }
   return (
     <div className="register-form">
-      <h1>Login</h1>
+      <h1>Login into your account</h1>
       <form className="form-input">
         <Input
           inputType="text"
@@ -81,6 +81,9 @@ export default function LoginPage() {
             onClick={(e) => {
               e.preventDefault();
               let { username, password } = globalData;
+              if (username && password) {
+                globalData.login({ username, password });
+              }
             }}
           >
             Login

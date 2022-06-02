@@ -33,8 +33,11 @@ input[type="password"] {
   outline: none;
 }
 
-.form-group {
+.form-group.input {
   margin-top: 35px;
+}
+.form-group {
+  margin-top: 20px;
 }
 
 .btnSubmit {
@@ -176,6 +179,15 @@ input[type="password"] {
   position: absolute;
   height: 11px;
   border: 1px solid hotpink;
+  border-radius: 2px;
+  top: 4px;
+}
+.checkbox1.check::after {
+  left: 3px;
+  width: 11px;
+  position: absolute;
+  height: 11px;
+  border: 1px solid black;
   border-radius: 2px;
   top: 4px;
 }
