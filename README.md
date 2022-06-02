@@ -1,6 +1,6 @@
 # view product here: https://thangduongnfq.github.io/register-page/
 
-## node version require
+## Setting Up Enviroment
 
 ```
   Node.js >= v14.17.4
