@@ -2,9 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import "./LoginPage.css";
 import { Input } from "../../components/index";
 import { useGlobalData } from "../../components/GlobalDataProvider/GlobalDataContext";
+import { useNavigate } from "react-router-dom";
 export default function LoginPage() {
   let [checkBox, setCheckbox] = useState(true);
   let globalData = useGlobalData();
+  let navigator = useNavigate();
   var errors = {
     uppercase: { regex: /[A-Z]/, description: "At least one uppercase letter" },
     lowercase: { regex: /[a-z]/, description: "At least one lowercase letter" },
@@ -83,6 +85,7 @@ export default function LoginPage() {
               let { username, password } = globalData;
               if (username && password) {
                 globalData.login({ username, password });
+                navigator("/Dashboard");
               }
             }}
           >

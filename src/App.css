@@ -23,12 +23,13 @@
 }
 
 .textfill {
-  background-color: red;
-  background-repeat: repeat;
+  background-image: url('./assest/moutain2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-top: 200px;
-  font-size: 120px;
+  /* margin-top: 250px; */
+  font-size: 250px;
   text-align: center;
   font-weight: bold;
   text-transform: uppercase;

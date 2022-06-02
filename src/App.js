@@ -7,12 +7,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Dashboard, Setting } from "./pages";
 import HomePage from "./pages/HomePage/HomePage";
 import PrivateRoute from "./components/PrivateRouter/PrivateRouter";
+import Navbar from "./components/navbar/Navbar";
 // HomePage
+// navbar
 function App() {
   return (
     <BrowserRouter>
       <GlobalDataProvider>
         <div className="App">
+          <Navbar />
           <Routes>
             <Route path="/Sign-in" element={<RegisterAndLogin />} />
             <Route path="/Setting" element={<Setting />} />
