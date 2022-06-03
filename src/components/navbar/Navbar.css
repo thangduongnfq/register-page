@@ -15,3 +15,12 @@
 .navbar .navbar__item:hover {
   background-color: #7fb5ff;
 }
+
+.Nav__link {
+  text-decoration: none;
+  color: #000;
+}
+
+.navbar__item.danger:hover {
+  background-color: hotpink;
+}

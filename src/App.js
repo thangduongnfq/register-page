@@ -16,7 +16,7 @@ function App() {
       <GlobalDataProvider>
         <div className="App">
           <Routes>
-            <Route path="/Sign-in" element={<RegisterAndLogin />} />
+            <Route path="/register-page" element={<RegisterAndLogin />} />
             <Route path="/" element={<HomePage />} />
             <Route element={<PrivateRoute />}>
               <Route path="/Dashboard" element={<Dashboard />} />
