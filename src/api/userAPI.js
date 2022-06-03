@@ -18,7 +18,7 @@ export default {
             Token:
               "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlRoYW5nIGR1b25nIiwiaWF0IjoxNTE2MjM5MDIyfQ.WB2dscqUQHLo8XZjOKjC8EQJEkDlbEkHdn7maOr1yDI",
           });
-        }, 3000);
+        }, 5000);
       });
     } else {
       return new Promise((resolve, reject) => {

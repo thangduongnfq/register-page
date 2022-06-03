@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../api/userAPI";
 
 const GlobalDataContext = React.createContext();
@@ -6,7 +7,7 @@ const GlobalDataContext = React.createContext();
 function GlobalDataProvider(props) {
   const [loading, setLoading] = useState(false);
   const [hiddenDiv, sethiddenDiv] = useState(false);
-
+  let navigator = useNavigate();
   const [value, setValue] = useState({
     username: "",
     email: "",
@@ -25,11 +26,17 @@ function GlobalDataProvider(props) {
   async function login(data) {
     setLoading(true);
     const userData = await api.login(data);
-    localStorage.setItem("token", userData.Token);
-    localStorage.setItem("roles", userData.role);
-    setField("roles", userData.role);
-    setLoading(false);
-    setValue(userData);
+    if (userData.status === "200") {
+      localStorage.setItem("token", userData.Token);
+      localStorage.setItem("roles", userData.role);
+      setField("roles", userData.role);
+      setLoading(false);
+      setValue(userData);
+      navigator("/Dashboard");
+    } else {
+      setLoading(false);
+      alert("not found");
+    }
   }
 
   const setHiddenPage = () => {

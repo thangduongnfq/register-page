@@ -16,9 +16,12 @@ export default function Navbar() {
             Setting
           </Link>
         </li>
-        <li className="navbar__item danger">
-          logout
+        <li className="navbar__item">
+          <Link className="Nav__link" to="/Animals">
+            Animals
+          </Link>
         </li>
+        <li className="navbar__item danger">logout</li>
       </ul>
     </nav>
   );

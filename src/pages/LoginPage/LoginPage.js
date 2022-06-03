@@ -85,7 +85,7 @@ export default function LoginPage() {
               let { username, password } = globalData;
               if (username && password) {
                 globalData.login({ username, password });
-                navigator("/Dashboard");
+                
               }
             }}
           >

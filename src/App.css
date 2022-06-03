@@ -8,13 +8,13 @@
 
 .page-container {
   width: 100vw;
-  height: 100vh;
+  height: 75vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.page-container div {
+.page-container > div {
   /* margin: 0 auto; */
   display: flex;
   justify-content: center;
@@ -23,7 +23,7 @@
 }
 
 .textfill {
-  background-image: url('./assest/moutain2.jpg');
+  background-image: url("./assest/moutain2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: left;

@@ -11,7 +11,7 @@ const PrivateRoute = () => {
     token !==
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlRoYW5nIGR1b25nIiwiaWF0IjoxNTE2MjM5MDIyfQ.WB2dscqUQHLo8XZjOKjC8EQJEkDlbEkHdn7maOr1yDI"
   ) {
-    return <Navigate to={"/sign-in"} replace />;
+    return <Navigate to={"/register-page"} replace />;
   }
 
   return (
