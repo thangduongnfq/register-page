@@ -1,4 +1,4 @@
-# view product here: [https://thangduongnfq.github.io/register-page/](https://thangduongnfq.github.io/Sign-in)
+# view product here: [(https://thangduongnfq.github.io/Sign-in](https://thangduongnfq.github.io/Sign-in)
 
 ## Setting Up Enviroment
 
