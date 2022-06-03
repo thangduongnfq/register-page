@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-
+import Navbar from "../navbar/Navbar";
+// navbar
 const PrivateRoute = () => {
   const token =
     localStorage.getItem("token") || sessionStorage.getItem("token");
@@ -15,6 +16,7 @@ const PrivateRoute = () => {
 
   return (
     <>
+      <Navbar />
       <Outlet />
     </>
   );

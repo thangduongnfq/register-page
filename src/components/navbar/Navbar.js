@@ -1,6 +1,6 @@
 import React from "react";
 import "./Navbar.css";
-export default function navbar() {
+export default function Navbar() {
   return (
     <nav>
       <ul className="navbar">

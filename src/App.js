@@ -4,7 +4,7 @@ import React from "react";
 import RegisterAndLogin from "./pages/RegisterAndLogin/RegisterAndLogin";
 import { GlobalDataProvider } from "./components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Dashboard, Setting } from "./pages";
+import { Dashboard, Setting, NotFoundPage } from "./pages";
 import HomePage from "./pages/HomePage/HomePage";
 import PrivateRoute from "./components/PrivateRouter/PrivateRouter";
 import Navbar from "./components/navbar/Navbar";
@@ -15,19 +15,16 @@ function App() {
     <BrowserRouter>
       <GlobalDataProvider>
         <div className="App">
-          <Navbar />
           <Routes>
             <Route path="/Sign-in" element={<RegisterAndLogin />} />
-            <Route path="/Setting" element={<Setting />} />
             <Route path="/" element={<HomePage />} />
-            <Route path="/DashBoard" element={<Dashboard />} />
             <Route element={<PrivateRoute />}>
               <Route path="/Dashboard" element={<Dashboard />} />
               {localStorage.getItem("roles") === "admin" && (
                 <Route path="/Settings" element={<Setting />} />
               )}
             </Route>
-            <Route path="*" element={<h1>404</h1>} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </GlobalDataProvider>
