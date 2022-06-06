@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/userAPI";
+import animalAPI from "../../api/animalAPI";
 
 const GlobalDataContext = React.createContext();
 
 function GlobalDataProvider(props) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [hiddenDiv, sethiddenDiv] = useState(false);
   let navigator = useNavigate();
   const [value, setValue] = useState({
@@ -14,29 +15,42 @@ function GlobalDataProvider(props) {
     password: "",
     roles: [],
   });
-  useEffect(() => {}, [loading]);
+
   async function fetchUserData(data) {
-    setLoading(true);
     const userData = await api.register(data);
-    setLoading(false);
     setHiddenPage();
     setValue(userData);
   }
 
-  async function login(data) {
+  const fetchAllUserData = async () => {
     setLoading(true);
+    const allDataUser = await animalAPI.getAll();
+    setLoading(false);
+    return allDataUser;
+  };
+
+  const deleteUserById = async (id) => {
+    setLoading(true);
+    const allDataUser = await animalAPI.deleteById(id);
+    setLoading(false);
+    return allDataUser;
+  };
+
+  async function login(data) {
     const userData = await api.login(data);
     if (userData.status === "200") {
       localStorage.setItem("token", userData.Token);
       localStorage.setItem("roles", userData.role);
       setField("roles", userData.role);
-      setLoading(false);
       setValue(userData);
       navigator("/Dashboard");
     } else {
-      setLoading(false);
       alert("not found");
     }
+  }
+
+  function setLoaddingPage() {
+    setLoading(!loading);
   }
 
   const setHiddenPage = () => {
@@ -52,6 +66,9 @@ function GlobalDataProvider(props) {
     ...value,
     loading,
     hiddenDiv,
+    fetchAllUserData,
+    setLoaddingPage,
+    deleteUserById,
     setField,
     setHiddenPage,
     login,

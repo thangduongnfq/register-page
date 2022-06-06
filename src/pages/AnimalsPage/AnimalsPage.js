@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Table, Space, Button } from "antd";
+import { Table, Space, Button, Avatar, Image } from "antd";
 import moment from "moment";
 import "./AnimalsPage.css";
 import animalAPI from "../../api/animalAPI";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-// DeleteOutlined
+import {
+  DeleteOutlined,
+  EditOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
+import {
+  ModalAddNewUser,
+  ModalDelete,
+  ModalLoading,
+  ModalUser,
+} from "../../components/";
+import { useGlobalData } from "../../components/GlobalDataProvider/GlobalDataContext";
+
 export default function AnimalsPage() {
   const [animals, setAnimals] = useState();
-  const getAnimals = async () => {
-    let data = await animalAPI.getAll();
-    return data;
-  };
+  const [isModalUserVisible, setIsModaUserlVisible] = useState(false);
+  const [isModalDeleteVisible, setIsModaDeletelVisible] = useState(false);
+  const [isModalAddNewUser, setisModalAddNewUser] = useState(true);
+  const [idUserCurrent, setIdUserCurrent] = useState();
+  let globalData = useGlobalData();
   useEffect(() => {
-    getAnimals().then((response) => {
+    globalData.fetchAllUserData().then((response) => {
       let convertData = response.map((item) => {
         return {
           ...item,
@@ -22,7 +34,33 @@ export default function AnimalsPage() {
       setAnimals(convertData);
     });
   }, []);
+  function showModal() {
+    setIsModaUserlVisible(true);
+  }
+  const handleOk = () => {
+    setIsModaUserlVisible(false);
+  };
+  const handleCancel = () => {
+    setIsModaUserlVisible(false);
+  };
+  const handleDeleteSubmitted = async (userData) => {
+    globalData.deleteUserById(userData.id);
+    let findIndexUserDelete = animals.map((e) => e.id).indexOf(userData.id);
+    let newObject = [
+      ...animals.slice(0, findIndexUserDelete),
+      ...animals.slice(findIndexUserDelete + 1),
+    ];
+    setAnimals(newObject);
+  };
+
   const columns = [
+    {
+      title: "Avatar",
+      dataIndex: "avatar",
+      render: (item) => (
+        <Avatar src={<Image src={item} style={{ width: 32 }} />} />
+      ),
+    },
     {
       title: "Name",
       dataIndex: "name",
@@ -46,13 +84,31 @@ export default function AnimalsPage() {
     {
       title: "Action",
       key: "action",
-      render: () => (
+      dataIndex: "id",
+      render: (data) => (
         <Space>
-          <Button type="danger" icon={<DeleteOutlined />}>
+          <Button
+            type="danger"
+            onClick={() => {
+              setIdUserCurrent(data);
+              setIsModaDeletelVisible(!isModalDeleteVisible);
+            }}
+            icon={<DeleteOutlined />}
+          >
             Delete
           </Button>
           <Button type="primary" icon={<EditOutlined />}>
             Edit
+          </Button>
+          <Button
+            primary
+            icon={<SearchOutlined />}
+            onClick={() => {
+              showModal();
+              setIdUserCurrent(data);
+            }}
+          >
+            View
           </Button>
         </Space>
       ),
@@ -73,6 +129,27 @@ export default function AnimalsPage() {
         />
         ;
       </div>
+      <ModalUser
+        handleCancel={handleCancel}
+        handleOk={handleOk}
+        isModalVisible={isModalUserVisible}
+        idUserView={idUserCurrent}
+        totalUsers={animals}
+      />
+      <ModalDelete
+        handleCancel={() => {
+          setIsModaDeletelVisible(!isModalDeleteVisible);
+        }}
+        handleOk={() => {
+          setIsModaDeletelVisible(!isModalDeleteVisible);
+        }}
+        isModalVisible={isModalDeleteVisible}
+        idUserView={idUserCurrent}
+        totalUsers={animals}
+        handleDeleteSubmitted={handleDeleteSubmitted}
+      />
+      <ModalAddNewUser isModalVisible={isModalAddNewUser} />
+      {globalData.loading && <ModalLoading />}
     </div>
   );
 }

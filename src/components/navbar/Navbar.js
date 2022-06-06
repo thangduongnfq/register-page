@@ -21,7 +21,9 @@ export default function Navbar() {
             Animals
           </Link>
         </li>
-        <li className="navbar__item danger">logout</li>
+        <li className="navbar__item danger" onClick={() => {}}>
+          logout
+        </li>
       </ul>
     </nav>
   );

@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
 import RegisterAndLogin from "./pages/RegisterAndLogin/RegisterAndLogin";
-import { GlobalDataProvider } from "./components";
+import { GlobalDataProvider, ModalLoadding } from "./components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Dashboard, Setting, NotFoundPage, AnimalsPage } from "./pages";
 import HomePage from "./pages/HomePage/HomePage";
