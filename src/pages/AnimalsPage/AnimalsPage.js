@@ -20,7 +20,7 @@ export default function AnimalsPage() {
   const [animals, setAnimals] = useState();
   const [isModalUserVisible, setIsModaUserlVisible] = useState(false);
   const [isModalDeleteVisible, setIsModaDeletelVisible] = useState(false);
-  const [isModalAddNewUser, setisModalAddNewUser] = useState(true);
+  const [isModalAddNewUser, setisModalAddNewUser] = useState(false);
   const [idUserCurrent, setIdUserCurrent] = useState();
   let globalData = useGlobalData();
   useEffect(() => {
