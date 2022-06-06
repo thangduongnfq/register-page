@@ -36,6 +36,13 @@ function GlobalDataProvider(props) {
     return allDataUser;
   };
 
+  const editUserById = async (data) => {
+    setLoading(true);
+    const allDataUser = await animalAPI.updateById(data);
+    setLoading(false);
+    return allDataUser;
+  };
+
   async function login(data) {
     const userData = await api.login(data);
     if (userData.status === "200") {
@@ -72,6 +79,7 @@ function GlobalDataProvider(props) {
     setField,
     setHiddenPage,
     login,
+    editUserById,
     fetchUserData,
   };
 

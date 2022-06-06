@@ -15,4 +15,11 @@ export default {
       return response.data;
     });
   },
+  updateById: (data) => {
+    return AxiosClient.put(`users/${data.id}`, {
+      ...data,
+    }).then((response) => {
+      return response.data;
+    });
+  },
 };

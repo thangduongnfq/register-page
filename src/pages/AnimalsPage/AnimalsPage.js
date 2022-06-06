@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Table, Space, Button, Avatar, Image } from "antd";
 import moment from "moment";
 import "./AnimalsPage.css";
-import animalAPI from "../../api/animalAPI";
+
 import {
   DeleteOutlined,
   EditOutlined,
-  SearchOutlined,
 } from "@ant-design/icons";
 import {
   ModalAddNewUser,
@@ -45,6 +44,16 @@ export default function AnimalsPage() {
   };
   const handleDeleteSubmitted = async (userData) => {
     globalData.deleteUserById(userData.id);
+    let findIndexUserDelete = animals.map((e) => e.id).indexOf(userData.id);
+    let newObject = [
+      ...animals.slice(0, findIndexUserDelete),
+      ...animals.slice(findIndexUserDelete + 1),
+    ];
+    setAnimals(newObject);
+    setIsModaDeletelVisible(!isModalDeleteVisible);
+  };
+  const handleUserEdit = async (userData) => {
+    globalData.editUserById(userData);
     let findIndexUserDelete = animals.map((e) => e.id).indexOf(userData.id);
     let newObject = [
       ...animals.slice(0, findIndexUserDelete),
@@ -97,12 +106,10 @@ export default function AnimalsPage() {
           >
             Delete
           </Button>
-          <Button type="primary" icon={<EditOutlined />}>
-            Edit
-          </Button>
+
           <Button
-            primary
-            icon={<SearchOutlined />}
+            type="primary"
+            icon={<EditOutlined />}
             onClick={() => {
               showModal();
               setIdUserCurrent(data);
@@ -135,6 +142,7 @@ export default function AnimalsPage() {
         isModalVisible={isModalUserVisible}
         idUserView={idUserCurrent}
         totalUsers={animals}
+        handleEditSubmitted={handleUserEdit}
       />
       <ModalDelete
         handleCancel={() => {
