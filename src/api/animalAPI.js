@@ -22,4 +22,11 @@ export default {
       return response.data;
     });
   },
+  addNewUser: (data) => {
+    return AxiosClient.post(`users/`, {
+      ...data,
+    }).then((response) => {
+      return response.data;
+    });
+  },
 };

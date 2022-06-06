@@ -8,7 +8,6 @@ export default function () {
   let globalData = useGlobalData();
   let navigate = useNavigate();
   useEffect(() => {
- 
     if (localStorage.getItem("roles")) {
       navigate("/Dashboard");
     }

@@ -6,7 +6,7 @@ import animalAPI from "../../api/animalAPI";
 const GlobalDataContext = React.createContext();
 
 function GlobalDataProvider(props) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [hiddenDiv, sethiddenDiv] = useState(false);
   let navigator = useNavigate();
   const [value, setValue] = useState({
@@ -44,7 +44,9 @@ function GlobalDataProvider(props) {
   };
 
   async function login(data) {
+    setLoading(true);
     const userData = await api.login(data);
+    setLoading(false);
     if (userData.status === "200") {
       localStorage.setItem("token", userData.Token);
       localStorage.setItem("roles", userData.role);
@@ -63,6 +65,14 @@ function GlobalDataProvider(props) {
   const setHiddenPage = () => {
     sethiddenDiv(!hiddenDiv);
   };
+
+  const addNewUserFunction = async (data) => {
+    setLoading(true);
+    const userData = await animalAPI.addNewUser(data);
+    setLoading(false);
+    return userData;
+  };
+
   const setField = (field, val) => {
     const _value = { ...value };
     _value[field] = val;
@@ -80,6 +90,7 @@ function GlobalDataProvider(props) {
     setHiddenPage,
     login,
     editUserById,
+    addNewUserFunction,
     fetchUserData,
   };
 

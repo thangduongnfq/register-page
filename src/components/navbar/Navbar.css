@@ -1,7 +1,7 @@
 .navbar {
   display: flex;
   gap: 2rem;
-  height: 150px;
+  height: 100px;
   align-items: center;
 }
 

@@ -3,10 +3,7 @@ import { Table, Space, Button, Avatar, Image } from "antd";
 import moment from "moment";
 import "./AnimalsPage.css";
 
-import {
-  DeleteOutlined,
-  EditOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import {
   ModalAddNewUser,
   ModalDelete,
@@ -60,6 +57,14 @@ export default function AnimalsPage() {
       ...animals.slice(findIndexUserDelete + 1),
     ];
     setAnimals(newObject);
+  };
+
+  const handleCreateUser = async (userData) => {
+    globalData.addNewUserFunction(userData);
+    console.log(userData);
+    let newObject = [{ ...userData, avatar: "" }, ...animals.slice(0)];
+    setAnimals(newObject);
+    setisModalAddNewUser(!isModalAddNewUser);
   };
 
   const columns = [
@@ -129,7 +134,14 @@ export default function AnimalsPage() {
           dataSource={animals}
           columns={columns}
           footer={() => (
-            <Button type="primary" block style={{ padding: 0 }}>
+            <Button
+              type="primary"
+              block
+              style={{ padding: 0 }}
+              onClick={() => {
+                setisModalAddNewUser(!isModalAddNewUser);
+              }}
+            >
               Add new
             </Button>
           )}
@@ -156,7 +168,12 @@ export default function AnimalsPage() {
         totalUsers={animals}
         handleDeleteSubmitted={handleDeleteSubmitted}
       />
-      <ModalAddNewUser isModalVisible={isModalAddNewUser} />
+      <ModalAddNewUser
+        isModalVisible={isModalAddNewUser}
+        idUserView={idUserCurrent}
+        totalUsers={animals}
+        handleCreateUser={handleCreateUser}
+      />
       {globalData.loading && <ModalLoading />}
     </div>
   );
