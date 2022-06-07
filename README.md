@@ -1,4 +1,4 @@
-# view product here: https://thangduongnfq.github.io/register-page/
+# view product here: [https://thangduongnfq.github.io/register-page/](https://stupendous-rugelach-713efd.netlify.app/register-page)
 
 ## Setting Up Enviroment
 
